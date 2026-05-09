@@ -1,0 +1,26 @@
+const { DataTypes } = require('sequelize');
+module.exports = (sequelize) => sequelize.define('Lead', {
+  id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+  firstName: { type: DataTypes.STRING, allowNull: false },
+  lastName: DataTypes.STRING,
+  email: DataTypes.STRING,
+  phone: DataTypes.STRING,
+  whatsapp: DataTypes.STRING,
+  company: DataTypes.STRING,
+  jobTitle: DataTypes.STRING,
+  source: { type: DataTypes.ENUM('web_form','facebook','whatsapp','email','manual','referral','linkedin','other'), defaultValue: 'manual' },
+  status: { type: DataTypes.ENUM('new','contacted','qualified','proposal','negotiation','won','lost','unresponsive'), defaultValue: 'new' },
+  score: { type: DataTypes.INTEGER, defaultValue: 0 },
+  value: { type: DataTypes.DECIMAL(12, 2), defaultValue: 0 },
+  currency: { type: DataTypes.STRING, defaultValue: 'INR' },
+  notes: DataTypes.TEXT,
+  tags: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: [] },
+  customFields: { type: DataTypes.JSONB, defaultValue: {} },
+  assignedTo: DataTypes.UUID,
+  campaignId: DataTypes.UUID,
+  lastContactedAt: DataTypes.DATE,
+  nextFollowUpAt: DataTypes.DATE,
+  lostReason: DataTypes.STRING,
+  city: DataTypes.STRING,
+  country: { type: DataTypes.STRING, defaultValue: 'IN' }
+});
